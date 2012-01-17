@@ -8,6 +8,8 @@ from gtk import clipboard_get
 from sys import argv
 
 def generate_password(seed, lowercase=7, uppercase=3, digits=3, symbols=3):
+    # NOTE Make defaults 4 for each? Or select characters randomly? Ensure a
+    # minimum of 2 characters of each type?
     '''Generates and returns a password based upon an input seed.'''
     random.seed(seed)
     password = ''
@@ -19,7 +21,9 @@ def generate_password(seed, lowercase=7, uppercase=3, digits=3, symbols=3):
         password += random.choice(string.digits)
     for _ in xrange(symbols):
         password += random.choice(string.punctuation)
+    # NOTE Change assignment to return.
     password = ''.join(random.sample(password, len(password)))
+    # NOTE Clipboard setting should be in main(), not here.
     set_clipboard(password)
     return password
 
@@ -30,6 +34,8 @@ def set_clipboard(text):
     clipboard.store()
 
 def main():
+    # NOTE Add more options and improve error handling.
+    # TODO Add more features.
     try:
         print 'AllPass - Your passwords everywhere and nowhere.'
         if '-o' in argv:
