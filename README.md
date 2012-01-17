@@ -5,7 +5,9 @@ Features
 --------
 Generate secure, portable and unique passwords for every website. All you need
 to remember is a singe "master" password. The program will generate different
-passwords depending on your input, that is, the seeds you enter on runtime.
+passwords depending on your input, that is, the seeds you enter on runtime. The
+default password length is 16 characters with 7 lowercase characters, 3
+uppercase characters, 3 numbers and 3 symbols.
 
 Setup
 -----
@@ -57,5 +59,3 @@ Or alternatively:
 
 As you may have noticed the text on the "Seed #x" lines is hidden. The program
 does this automatically in case someone is sitting beside you.
-
-
