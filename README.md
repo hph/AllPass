@@ -20,8 +20,8 @@ Open a terminal and execute the following commands:
 
 Modify `$USER` in the following lines to your username:
 
-    $ echo alias k="python /home/$USER/.allpass/allpass.py >> ~/.bashrc"
-    $ echo alias ko="python /home/$USER/.allpass/allpass.py -o >> ~/.bashrc"
+    $ echo alias k="python /home/$USER/.allpass/allpass.py" >> ~/.bashrc
+    $ echo alias ko="python /home/$USER/.allpass/allpass.py -o" >> ~/.bashrc
 
 Close the terminal and open it anew. Type `k` to run the program normally, `ko`
 to run it with the parameter -o (additional options).
