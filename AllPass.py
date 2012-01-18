@@ -1,16 +1,31 @@
 #!/usr/bin/env python
 #coding=utf8
 
+# TODO
+# pwd_strength()
+# import optparser
+# import setupdrasl
+# setup shit..
+# ...
+
 import random
 import string
 from getpass import getpass
 from gtk import clipboard_get
 from sys import argv
 
+def password(seed, lowercase=4, uppercase=4, digits=4, symbols=4):
+    ''''''
+    rand_str = lambda len: ''.join(sample(letters + digits + punctuation, len))
+    in_chars = lambda chars: any([1 for x in xrange(1,10) if str(x) in chars])
+    random.seed(seed)
+    password = rand_str(16)
+    return password if in_chars( # breyta in_chars, check for any for all.
+
 def generate_password(seed, lowercase=7, uppercase=3, digits=3, symbols=3):
-    # NOTE Make defaults 4 for each? Or select characters randomly? Ensure a
-    # minimum of 2 characters of each type?
     '''Generates and returns a password based upon an input seed.'''
+    # NOTE A simpler and yet acceptable way to do this would be
+    # ''.join(sample(lowercase + uppercase + digits + punctuation, 16))
     random.seed(seed)
     password = ''
     for _ in xrange(lowercase):
@@ -21,11 +36,7 @@ def generate_password(seed, lowercase=7, uppercase=3, digits=3, symbols=3):
         password += random.choice(string.digits)
     for _ in xrange(symbols):
         password += random.choice(string.punctuation)
-    # NOTE Change assignment to return.
-    password = ''.join(random.sample(password, len(password)))
-    # NOTE Clipboard setting should be in main(), not here.
-    set_clipboard(password)
-    return password
+    return ''.join(random.sample(password, len(password)))
 
 def set_clipboard(text):
     '''Sets text as the clipboard.'''
