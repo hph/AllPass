@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 #coding=utf8
 
+# NOTE Probably not functional after tha last changes
+# Untested.
+
 import hashlib # TODO
 import optparser # TODO
 from getpass import getpass
