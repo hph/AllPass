@@ -19,7 +19,7 @@ Open a terminal and execute the following commands:
     $ mkdir ~/.allpass
     $ cp *.* ~/.allpass
     ```
-```shell
+```bash
 cd ~/Downloads/AllPass # cd to the folder containing the source files.
 mkdir ~/.allpass
 cp *.* ~/.allpass
