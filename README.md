@@ -14,16 +14,9 @@ Setup
 ### Installing on Linux
 Open a terminal and execute the following commands:
 
-    ```shell
     $ cd ~/Downloads/AllPass # cd to the folder containing the source files.
     $ mkdir ~/.allpass
     $ cp *.* ~/.allpass
-    ```
-```bash
-cd ~/Downloads/AllPass # cd to the folder containing the source files.
-mkdir ~/.allpass
-cp *.* ~/.allpass
-```
 
 Modify `$USER` in the following lines to your username:
 
