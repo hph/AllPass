@@ -1,20 +1,15 @@
 #!/usr/bin/env python
 #coding=utf8
 
-# NOTE Probably not functional after tha last changes
-# Untested.
-
-import hashlib # TODO
-import optparser # TODO
 from getpass import getpass
 from gtk import clipboard_get
-from random import choice, sample
+from random import choice, sample, seed
 from string import lowercase, uppercase, digits, punctuation
 from sys import argv
 
 CHR_SET = [lowercase, uppercase, digits, punctuation]
 
-def random_string(length):
+def random_string(len):
     '''Return a random string of lenght 'len'.'''
     return ''.join(choice(''.join(CHR_SET)) for _ in xrange(len))
 
@@ -25,31 +20,38 @@ def strong_password(password):
     # Check if there's at least one character from each character subset.
     return all(in_chrs(chr_subset) for chr_subset in CHR_SET)
 
-def password(seed, lower=False, upper=False, digits=False, punct=False):
-    '''Generate and return a password based on 'seed'.'''
-    seed(seed)
-    if any([lower, upper, digits, punct]):
-        # NOTE This is still not good enough.
-        password = ''
-        for arg in [lower, upper, digits, punct]:
-            password += ''.join(choice(chrs) for _ in xrange(arg) for chrs in
-                                CHR_SET)
-        password = ''.join(sample(password, len(password)))
-    else:
-        while True:
-            password = random_string(16)
-            if strong_password(password):
-                break
-    return password
-
 def set_clipboard(text):
     '''Sets text as the clipboard.'''
     clipboard = clipboard_get()
     clipboard.set_text(text)
     clipboard.store()
 
+def allpass(secret_seed, lower=False, upper=False, digits=False, punct=False):
+    '''Generate and return a password based on 'seed'.'''
+    # NOTE This function doesn't need to be divided into two sections, but the
+    # random_string function is needed elsewhere anyway...
+    # Also, the code below needs to be rewritten as it's ugly as hell.
+    seed(secret_seed)
+    if any([lower, upper, digits, punct]):
+        password = ''
+        for arg in [lower, upper, digits, punct]:
+            password += ''.join(choice(chrs) for _ in xrange(arg) for chrs in
+                                CHR_SET)
+        password = ''.join(sample(password, len(password)))
+    else:
+        # Why did I do it this way?
+        while True:
+            password = random_string(16)
+            if strong_password(password):
+                break
+    return password
+
 def main():
-    # TODO Add set_clipboard to this.
+    # TODO:
+    # - Use optparser and hashlib and restructure accordingly.
+    # - Improve error handling.
+    # - Add features, such as generating a random string with random_string.
+    # - Write a setup program.
     try:
         print 'AllPass - Your passwords everywhere and nowhere.'
         if '-o' in argv:
@@ -65,19 +67,17 @@ def main():
             uppercase = int(raw_input('Number of uppercase characters: '))
             digits = int(raw_input('Number of digits: '))
             symbols = int(raw_input('Number of symbols: '))
-            password = password(seed, lowercase, uppercase, digits, symbols)
+            password = allpass(seed, lowercase, uppercase, digits, symbols)
             set_clipboard(password)
         else:
-            password = password((getpass('Seed #1: '), getpass('Seed #2: ')))
+            password = allpass((getpass('Seed #1: '), getpass('Seed #2: ')))
             set_clipboard(password)
         print 'Password saved to the clipboard.',
         raw_input('Press enter to clear it and exit.')
         set_clipboard('')
     except:
         print 'Error!'
-        try:
-            if clipboard.get() == password:
-                set.clipboard('')
+        set_clipboard('')
 
 if __name__ == '__main__':
     main()
