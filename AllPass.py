@@ -39,7 +39,8 @@ def allpass(secret_seed, lower=False, upper=False, digits=False, punct=False):
                                 CHR_SET)
         password = ''.join(sample(password, len(password)))
     else:
-        # Why did I do it this way?
+        # Why did I do it this way? Functionality over aesthetics, I guess...
+        # for now, anyway.
         while True:
             password = random_string(16)
             if strong_password(password):
