@@ -14,38 +14,32 @@ Setup
 ### Installing on Linux
 Open a terminal and execute the following commands:
 
-    $ cd ~/Downloads/AllPass # cd to the folder containing the source files.
-    $ mkdir ~/.allpass
-    $ cp *.* ~/.allpass
-
-Modify `$USER` in the following lines to your username:
-
-    $ echo alias k="python /home/$USER/.allpass/allpass.py" >> ~/.bashrc
-    $ echo alias ko="python /home/$USER/.allpass/allpass.py -o" >> ~/.bashrc
-
-Close the terminal and open it anew. Type `k` to run the program normally, `ko`
-to run it with the parameter -o (additional options).
+    $ git clone git://github.com/haukurpallh/AllPass.git
+    $ mv AllPass ~/.allpass
+    $ echo alias ap="python /home/$USER/.allpass/allpass.py" >> ~/.bashrc
+    $ echo alias apo="python /home/$USER/.allpass/allpass.py -o" >> ~/.bashrc
 
 Usage
 -----
-To run the program simply type `k` in the terminal. Additional options are
-available by typing `ko` or by running the program with the parameter `-o`. On
+To run the program simply type `ap` in the terminal. Additional options are
+available by typing `apo` or by running the program with the parameter `-o`. On
 runtime you're asked for two seeds (or more via `-o` if you wish). The first
 seed may be called your "master password", which you should use for all the
 passwords you wish to generate. The second seed may be called the "ID" of the
 password you want to generate. This means that all you have to remember to
-generate the same password is the master password (preferably the same for all
-your passwords) and the password's ID. Example:
+generate the same password is the master password (ideally the same for all
+your passwords) and the password's ID. For example:
 
-    $ k
+    $ ap
     AllPass - Your passwords everywhere and nowhere.
-    Seed #1:
-    Seed #2:
+    Seed #1: $master
+    Seed #2: $id
     Password saved to the clipboard. Press enter to clear it and exit.
 
-Or alternatively:
+Your input isn't visible for safety purposes. If you want, you can
+alternatively use the `apo` command:
 
-    $ ko
+    $ apo
     AllPass - Your passwords everywhere and nowhere.
     Number of seeds: 3
     Seed #1: 
@@ -56,6 +50,3 @@ Or alternatively:
     Number of digits: 4
     Number of symbols: 4
     Password saved to the clipboard. Press enter to clear it and exit.
-
-As you may have noticed the text on the "Seed #x" lines is hidden. The program
-does this automatically in case someone is sitting beside you.
