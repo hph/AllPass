@@ -49,6 +49,7 @@ def allpass(secret_seed, lower=False, upper=False, digits=False, punct=False):
 def main():
     # TODO:
     # - Use optparser and hashlib and restructure accordingly.
+    # - Use configparser for settings and salted hash storage?
     # - Improve error handling.
     # - Add features, such as generating a random string with random_string.
     # - Write a setup program.
